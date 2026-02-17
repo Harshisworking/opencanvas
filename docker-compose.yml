@@ -7,9 +7,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - postgres_data:
+      # सोर्स (वॉल्यूम नाम) : डेस्टिनेशन (कंटेनर के अंदर का पाथ)
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - Excalidraw
 
@@ -21,7 +22,7 @@ services:
     ports:
       - "3000:3000"
       - "3002:3002"
-      - "8080:8080" # Browser uses localhost
+      - "8080:8080"
     depends_on:
       - db
     networks:
@@ -30,5 +31,6 @@ services:
 networks:
   Excalidraw:
     driver: bridge
+
 volumes:
   postgres_data:
