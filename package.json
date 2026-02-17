@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "dev": " cd packages/db && npx prisma migrate dev --name init && cd ../.. && turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "@types/bcrypt": "^6.0.0",
+    "axios": "^1.13.5",
     "bcrypt": "^6.0.0",
     "lucide-react": "^0.562.0"
   }
