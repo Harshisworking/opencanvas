@@ -10,7 +10,7 @@ COPY . .
 
 # 3. FIX: Install from the ROOT. 
 # This links @repo/db to your apps automatically.
-RUN yarn install
+RUN npm install
 
 # 4. Generate Prisma Client
 RUN cd packages/db && npx prisma generate
