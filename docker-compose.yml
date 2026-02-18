@@ -9,10 +9,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      # सोर्स (वॉल्यूम नाम) : डेस्टिनेशन (कंटेनर के अंदर का पाथ)
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - Excalidraw
 
   website:
     build:
@@ -25,12 +22,6 @@ services:
       - "8080:8080"
     depends_on:
       - db
-    networks:
-      - Excalidraw
-
-networks:
-  Excalidraw:
-    driver: bridge
 
 volumes:
   postgres_data:
