@@ -1,7 +1,7 @@
 services:
   # 1. The Database
   db:
-    image: postgres
+    image: postgres:latest
     container_name: postgres
     environment:
       POSTGRES_USER: postgres
@@ -9,17 +9,19 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
   website:
     build:
       context: .
       dockerfile: ./Docker/docker-http.dockerfile
     container_name: http-server
+    environment:
+      - DATABASE_URL=postgresql://postgres:1234@db:5432/postgres
     ports:
       - "3000:3000"
       - "3002:3002"
-      - "8080:8080"
+      - "8080:8080" # Browser uses localhost
     depends_on:
       - db
 
