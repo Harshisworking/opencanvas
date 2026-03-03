@@ -9,7 +9,17 @@ import cors from "cors";
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: function (origin, callback) {
+        // This allows any request coming from your local network/localhost
+        if (!origin || origin.startsWith('http://localhost') || origin.startsWith('http://192.168')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 app.use(express.json());
 
 app.post("/signup", async (req, res) => {
